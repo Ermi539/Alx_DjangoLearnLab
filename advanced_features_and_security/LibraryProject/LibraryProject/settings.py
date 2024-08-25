@@ -121,3 +121,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
+SECURE_BROWSER_XSS_FILTER
+X_FRAME_OPTIONS
+SECURE_CONTENT_TYPE_NOSNIFF
+CSRF_COOKIE_SECURE
+SESSION_COOKIE_SECURE
