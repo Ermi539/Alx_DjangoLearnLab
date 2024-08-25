@@ -34,3 +34,5 @@ class Book(models.Model):
 
        def str(self):
            return self.username
+can_create
+can_delete
