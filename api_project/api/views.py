@@ -17,4 +17,23 @@ from .serializers import BookSerializer
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+       from rest_framework.authtoken.views import obtain_auth_token
+   from rest_framework.authtoken.models import Token 
+   from rest_framework.permissions import IsAuthenticated
+
+   # ... other imports
+
+   class BookViewSet(viewsets.ModelViewSet):
+       queryset = Book.objects.all()
+       serializer_class = BookSerializer
+       permission_classes = [IsAuthenticated] 
+
+   # ... other views
+
+   urlpatterns = [
+       # ... other patterns
+       path('api-token-auth/', obtain_auth_token), 
+   ]
+   
+
 
