@@ -23,3 +23,4 @@ class BookListView(generics.ListCreateAPIView):
 CreateView
 UpdateView
 DeleteView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
