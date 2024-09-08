@@ -45,7 +45,7 @@ class BookListView(generics.ListCreateAPIView):
        """
        # ... (rest of the view code)
    
-
+from django_filters import rest_framework
 
    
 
