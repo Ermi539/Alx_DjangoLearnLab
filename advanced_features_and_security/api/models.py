@@ -13,4 +13,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
-   
+# ... code ...
+   class BookSerializer(serializers.ModelSerializer):
+       """
+       Serializes Book model instances, including nested author information.
+       """
+       # ... code ...
