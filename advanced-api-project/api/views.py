@@ -20,3 +20,6 @@ class BookListView(generics.ListCreateAPIView):
         response = super().create(request, *args, **kwargs)
         # ... (additional logic if needed)
         return response
+CreateView
+UpdateView
+DeleteView
