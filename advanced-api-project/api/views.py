@@ -37,6 +37,15 @@ class BookListView(generics.ListCreateAPIView):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['title', 'author', 'publication_year']
     search_fields = ['title', 'author__name']
-    ordering_fields = ['title', 'publication_year']
+    ordering_fields = ['title', 'publication_year']   class BookListView(generics.ListCreateAPIView):
+       """
+       Handles listing all books and creating new books.
+       Allows filtering, searching, and ordering of books using query parameters.
+       Requires authentication for creating, but allows unauthenticated users to view the list.
+       """
+       # ... (rest of the view code)
+   
+
+
    
 
