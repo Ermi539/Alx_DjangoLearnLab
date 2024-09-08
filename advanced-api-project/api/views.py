@@ -47,5 +47,5 @@ class BookListView(generics.ListCreateAPIView):
    
 from django_filters import rest_framework
 filters.OrderingFilter
-   
+filters.SearchFilter
 
