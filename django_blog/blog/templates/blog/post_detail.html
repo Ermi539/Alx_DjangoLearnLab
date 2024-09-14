@@ -1,0 +1,19 @@
+<!-- templates/blog/post_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ object.title }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h2>{{ object.title }}</h2>
+    <p>{{ object.content }}</p>
+    {% if user == object.author %}
+        <a href="{% url 'post-update' object.pk %}">Edit</a>
+        <a href="{% url 'post-delete' object.pk %}">Delete</a>
+    {% endif %}
+    <a href="{% url 'post-list' %}">Back to List</a>
+</body>
+</html>
+
