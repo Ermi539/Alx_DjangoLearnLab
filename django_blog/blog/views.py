@@ -30,8 +30,7 @@ def user_login(request):
     return render(request, 'registration/login.html')
 
 def user_logout(request):
-    logout(request)
-    return redirect('login')
+    return LogoutView.as_view(next_page=reverse_lazy('login'))(request)
 
 @login_required
 def profile(request):
