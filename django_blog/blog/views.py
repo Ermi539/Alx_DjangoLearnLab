@@ -5,6 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
+from django.urls import reverse_lazy
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from .models import Post, Comment
+from .forms import CommentForm
+
 # blog/views.py
 
 def register(request):
@@ -129,5 +136,42 @@ def delete_comment(request, pk):
         comment.delete()
         return redirect('post_detail', pk=comment.post.pk)
     return render(request, 'confirm_delete.html', {'comment': comment})
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'comment_form.html'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.post = get_object_or_404(Post, pk=self.kwargs['post_pk'])
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('post_detail', kwargs={'pk': self.object.post.pk})
+class CommentUpdateView(LoginRequiredMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'comment_form.html'
+
+    def get_object(self, queryset=None):
+        comment = super().get_object(queryset)
+        if self.request.user != comment.author:
+            raise PermissionDenied
+        return comment
+
+    def get_success_url(self):
+        return reverse_lazy('post_detail', kwargs={'pk': self.object.post.pk})
+class CommentDeleteView(LoginRequiredMixin, DeleteView):
+    model = Comment
+    template_name = 'confirm_delete.html'
+
+    def get_object(self, queryset=None):
+        comment = super().get_object(queryset)
+        if self.request.user != comment.author:
+            raise PermissionDenied
+        return comment
+
+    def get_success_url(self):
+        return reverse_lazy('post_detail', kwargs={'pk': self.object.post.pk})
 
 
