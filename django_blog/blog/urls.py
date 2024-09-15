@@ -23,7 +23,7 @@ urlpatterns = [
     path('tags/<str:tag_name>/', views.posts_by_tag, name='posts_by_tag'),
     path('tags/<slug:tag_slug>/', views.posts_by_tag, name='posts_by_tag'),
     
-
     
 ]
 ByTagListView.as_view()
+PostByTagListView.as_view()
