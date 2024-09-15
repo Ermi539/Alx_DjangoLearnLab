@@ -177,4 +177,7 @@ def posts_by_tag(request, tag_name):
     tag = get_object_or_404(Tag, name=tag_name)
     posts = tag.posts.all()
     return render(request, 'posts_by_tag.html', {'posts': posts, 'tag': tag})
-
+Post.objects.filter 
+title__icontains
+tags__name__icontains
+content__icontains
