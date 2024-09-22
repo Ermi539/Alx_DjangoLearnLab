@@ -12,7 +12,7 @@ from rest_framework import status
 from django.contrib.auth import authenticate
 from .models import User
 from .serializers import UserSerializer  # Adjust according to your actual serializer file
-
+CustomUser.objects.all()
 class LoginView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         username = request.data.get('username')
