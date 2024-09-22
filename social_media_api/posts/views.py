@@ -86,3 +86,18 @@ class UnlikePostView(generics.GenericAPIView):
             return Response({"message": "Post unliked."})
         except Like.DoesNotExist:
             return Response({"message": "You have not liked this post."})
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .models import Post  # Import your Post model
+
+class FeedView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        following_users = user.following.all()  # Assuming you have a following relationship
+        posts = Post.objects.filter(author__in=following_users).order_by('-created_at')
+        # Serialize the posts as needed
+        serialized_posts = PostSerializer(posts, many=True)  # Adjust based on your serializer
+        return Response(serialized_posts.data)
