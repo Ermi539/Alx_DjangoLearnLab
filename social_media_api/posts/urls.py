@@ -11,4 +11,5 @@ from .views import LikePostView, UnlikePostView
 urlpatterns = [
     path('<int:post_id>/like/', LikePostView.as_view(), name='like_post'),
     path('<int:post_id>/unlike/', UnlikePostView.as_view(), name='unlike_post'),
+    path('feed/', FeedView.as_view(), name='feed'),
 ]
